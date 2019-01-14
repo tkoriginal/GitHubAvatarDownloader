@@ -23,11 +23,9 @@ getRepoContributors("jquery", "jquery", usersAvatarURL);
 function usersAvatarURL(err, userData) {
   if (err) throw err;
   userData.forEach(user => {
-    console.log(user.avatar_url)
+    downloadImageByURL(user.avatar_url, `./avatars/${user.login}.jpg`)
   })
 }
-
-downloadImageByURL("https://avatars2.githubusercontent.com/u/2741?v=3&s=466", "./avatars/kvirani.jpg") 
 
 function downloadImageByURL(url, filePath) {
   request(url)
