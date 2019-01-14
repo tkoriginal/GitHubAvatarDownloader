@@ -1,5 +1,6 @@
 const request = require('request');
 const {GITHUB_TOKEN} = require('./secret');
+const fs = require('fs');
 
 console.log(`Welcome to the GitHub Avatar Downloader!`);
 
@@ -24,4 +25,14 @@ function usersAvatarURL(err, userData) {
   userData.forEach(user => {
     console.log(user.avatar_url)
   })
+}
+
+downloadImageByURL("https://avatars2.githubusercontent.com/u/2741?v=3&s=466", "./avatars/kvirani.jpg") 
+
+function downloadImageByURL(url, filePath) {
+  request(url)
+    .on('err', err => {
+      throw err;
+    })
+    .pipe(fs.createWriteStream(filePath))
 }
