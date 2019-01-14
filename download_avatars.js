@@ -12,11 +12,16 @@ function getRepoContributors (repoOwner, repoName, callback) {
     }
   }
   request( options,(err, res, body) => {
-    callback(err, body)
+    const users = JSON.parse(body)
+    callback(err, users)
   });
 }
 
-getRepoContributors("jquery", "jquery", function(error, response) {
-  console.log('Errors:', error);
-  console.log('Response:', response);
-});
+getRepoContributors("jquery", "jquery", usersAvatarURL);
+
+function usersAvatarURL(err, userData) {
+  if (err) throw err;
+  userData.forEach(user => {
+    console.log(user.avatar_url)
+  })
+}
